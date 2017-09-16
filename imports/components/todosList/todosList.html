@@ -1,10 +1,9 @@
 <header>
   <h1>Todo List</h1>
 
-  <label class="hide-completed">
-    <input type="checkbox" ng-model="$ctrl.hideCompleted"/>
+  <button class="hide-completed btn-flat" ng-click="$ctrl.toggleHideCompleted()">
     Hide Completed Tasks
-  </label>
+  </button>
 
   <login-buttons></login-buttons>
 
@@ -18,19 +17,19 @@
   </form>
   
 </header>
- 
-<ul>
-  <li ng-repeat="task in $ctrl.tasks" ng-class="{'checked': task.checked, 'private': task.private}">
-    <button class="delete" ng-click="$ctrl.removeTask(task)">&times;</button>
- 
-    <input type="checkbox" ng-checked="task.checked" ng-click="$ctrl.setChecked(task)" class="toggle-checked"/>
- 
-    <span class="text">
-      <strong>{{task.username}}</strong>: <em>{{task.createdAt | date:'medium' }}</em> - {{task.text}}
-    </span>
 
-    <button class="toggle-private" ng-click="$ctrl.setPrivate(task)" ng-show="task.owner === $ctrl.currentUser._id">
-      {{task.private == true ? "Private" : "Public"}}
-    </button>
-  </li>
-</ul>
+<div class="col s12">
+  <div class="collection">
+    <div ng-repeat="task in $ctrl.tasks" ng-class="{'checked': task.checked, 'private': task.private}" class="element">
+      <button class="delete btn-flat" ng-click="$ctrl.removeTask(task)">&times;</button>
+   
+      <span class="text" ng-click="$ctrl.setChecked(task)">
+        <strong>{{task.username}}</strong>: <em>{{task.createdAt | date:'medium' }}</em> - {{task.text}}
+      </span>
+
+      <button class="toggle-private btn-flat" ng-click="$ctrl.setPrivate(task)" ng-show="task.owner === $ctrl.currentUser._id">
+        {{task.private == true ? "Private" : "Public"}}
+      </button>
+    </div>
+  </div>
+</div>

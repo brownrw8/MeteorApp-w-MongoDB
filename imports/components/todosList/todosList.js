@@ -71,6 +71,10 @@ class TodosListCtrl {
   setPrivate(task) {
     Meteor.call('tasks.setPrivate', task._id, !task.private);
   }
+
+  toggleHideCompleted() {
+    this.hideCompleted = !this.hideCompleted;
+  }
 }
  
 export default angular.module('todosList', [
